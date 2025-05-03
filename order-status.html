@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Placed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap CSS (optional, for styling) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { display:flex; align-items:center; justify-content:center; height:100vh; background:#FFF9F1; font-family:sans-serif; }
+    .card { padding:2rem; border-radius:1rem; box-shadow:0 0.5rem 1rem rgba(0,0,0,0.1); text-align:center; background:white; }
+    #timer { font-size:2rem; font-weight:bold; color:#ff6a00; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="mb-4">🎉 Your order is placed!</h1>
+    <p>Your order will arrive at your location in <span id="timer">20:00</span> mins </p>
+  </div>
+
+  <script>
+    // 20 minutes in seconds
+    let remaining = 20 * 60;
+    const timerEl = document.getElementById('timer');
+
+    const interval = setInterval(() => {
+      const m = Math.floor(remaining / 60);
+      const s = remaining % 60;
+      timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      remaining--;
+
+      if (remaining < 0) {
+        clearInterval(interval);
+        // Optionally redirect back to the reservation page:
+        // window.location.href = 'index.html';
+        timerEl.textContent = '00:00';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
